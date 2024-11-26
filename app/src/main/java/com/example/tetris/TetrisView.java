@@ -2,6 +2,7 @@
 package com.example.tetris;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -277,19 +278,14 @@ public class TetrisView extends View {
 
     private void showGameOverDialog() {
         post(() -> {
-            new android.app.AlertDialog.Builder(getContext())
-                    .setTitle("Game Over")
-                    .setMessage(String.format("Score: %d\nLevel: %d", game.getScore(), game.getLevel()))
-                    .setPositiveButton("Restart", (dialog, which) -> {
-                        startGame();
-                    })
-                    .setNegativeButton("Exit", (dialog, which) -> {
-                        if (getContext() instanceof android.app.Activity) {
-                            ((android.app.Activity) getContext()).finish();
-                        }
-                    })
-                    .setCancelable(false)
-                    .show();
+            Intent intent = new Intent(getContext(), GameOverActivity.class);
+            intent.putExtra("SCORE", game.getScore());
+            intent.putExtra("LEVEL", game.getLevel());
+            getContext().startActivity(intent);
+
+            if (getContext() instanceof android.app.Activity) {
+                ((android.app.Activity) getContext()).finish();
+            }
         });
     }
 
@@ -309,4 +305,5 @@ public class TetrisView extends View {
         isGameRunning = false;
         gameLoopHandler.removeCallbacksAndMessages(null);
     }
+
 }
