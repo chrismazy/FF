@@ -48,9 +48,8 @@ public class MainMenuActivity extends AppCompatActivity {
                         "← →：左右移動\n" +
                         "↻：旋轉\n" +
                         "▼：慢速下落\n" +
-                        "⚡：快速下落\n\n" +
-                        "開發者：[你的名字]\n" +
-                        "© 2024 版權所有")
+                        "⚡：快速下落\n\n"
+                       )
                 .setPositiveButton("確定", null)
                 .show();
     }
